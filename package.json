@@ -1,0 +1,32 @@
+{
+  "name": "remixml-htmldom",
+  "version": "4.0.0",
+  "description": "Remixml component that renders to DOM using HTML in browsers",
+  "main": "remixml-htmldom.min.js",
+  "browser": "remixml-htmldom.min.js",
+  "scripts": {
+    "prepare": "./prepfiles"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "remixml": "*"
+  },
+  "devDependencies": {},
+  "directories": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BuGlessRB/remixml-htmldom"
+  },
+  "keywords": [
+    "remixml",
+    "browser",
+    "render",
+    "DOM",
+    "zerodeps"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "Stephen R. van den Berg <srb@cuci.nl>",
+  "license": "(ISC OR GPL-3.0)"
+}
