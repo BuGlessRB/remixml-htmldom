@@ -15,7 +15,7 @@ is not possible).
 
 ## Requirements
 
-It runs inside any webbrowser or NodeJS environment.
+It runs inside any webbrowser environment.
 
 ## Reference documentation
 
