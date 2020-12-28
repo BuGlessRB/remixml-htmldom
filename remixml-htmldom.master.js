@@ -35,6 +35,23 @@
       function /** !Node */(/** !Array */ tpl,/** !Node= */ node)
       { var /** !Node */ newnodes = node || diva;
 	newnodes.innerHTML = abstract2txt(tpl, 1);
+	var /** !NodeList<!Element> */ scripts
+	 = newnodes.querySelectorAll("script");
+	var /** number */ i = 0;
+	while (i < scripts.length)
+	{ var /** !Node */ olds = scripts[i++];
+	  // Clone script tag
+          var /** !Node */ ns = D.createElement("script");
+          ns.innerHTML = olds.innerHTML;
+          var /** NamedNodeMap<!Attr> */ attrs = olds.attributes;
+          var /** number */ j;
+          for (j = 0; j < attrs.length; )
+          { let /** Attr */ attr = attrs[j++];
+            ns.setAttribute(attr.name, attr.value);
+          }
+	  // Execute script tag
+	  olds.parentNode.replaceChild(ns, olds);
+	}
 	if (!node)
 	{ var /** Range */ k = D.createRange();
           k.selectNodeContents(newnodes);
