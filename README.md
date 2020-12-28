@@ -7,6 +7,11 @@
 Remixml component that renders directly to the DOM in browsers.
 
 Converts to HTML first, then uses innerHTML to get the browser to convert it.
+The performance might be slightly higher than with `remixml-dom`, but
+it is not limited by the
+pseudo-smart parsing rules that the browser HTML parser imposes, i.e.
+some DOM structures cannot be created (e.g. a div nested inside a p tag
+is not possible).
 
 ## Requirements
 
