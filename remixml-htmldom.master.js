@@ -42,7 +42,7 @@
 	{ var /** !Node */ olds = scripts[i++];
 	  // Clone script tag
           var /** !Node */ ns = D.createElement("script");
-          ns.innerHTML = olds.innerHTML;
+          ns.text = olds.innerHTML;
           var /** NamedNodeMap<!Attr> */ attrs = olds.attributes;
           var /** number */ j;
           for (j = 0; j < attrs.length; )
