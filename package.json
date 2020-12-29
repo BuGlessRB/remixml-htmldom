@@ -1,6 +1,6 @@
 {
   "name": "remixml-htmldom",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Remixml component that renders to DOM using HTML in browsers",
   "main": "remixml-htmldom.min.js",
   "browser": "remixml-htmldom.min.js",
@@ -21,8 +21,7 @@
     "remixml",
     "browser",
     "render",
-    "DOM",
-    "zerodeps"
+    "DOM"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
