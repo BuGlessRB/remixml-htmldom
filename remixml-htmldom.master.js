@@ -70,6 +70,7 @@
 
   function /** !Object */ factory(/** !Object */ rxml)
   { abstract2txt = rxml["abstract2txt"];
+    O.assign(rxml, g);
     return g;
   }
 
