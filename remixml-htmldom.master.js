@@ -30,7 +30,7 @@
   { return D.createElement(n);
   }
 
-  var g =
+  const /** !Object */ g =
   { "abstract2dom":
       function /** !Node */(/** !Array */ tpl,/** !Node= */ node)
       { var /** !Node */ newnodes = node || diva;
