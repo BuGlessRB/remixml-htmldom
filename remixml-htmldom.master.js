@@ -7,6 +7,7 @@
 /** @define {number} */ var MEASUREMENT = 0;
 /** @define {number} */ var ASSERT = 1;
 /** @define {number} */ var VERBOSE = 0;
+/** @define {number} */ var FALSE = 0;
 
 // Cut BEGIN delete
 (function()
@@ -75,7 +76,7 @@
 
   function /** !Object */ factory(/** !Object */ rxml)
   { abstract2txt = rxml["abstract2txt"];
-    var ttypes = W.trustedTypes;
+    var ttypes = FALSE && W.trustedTypes;
     if (ttypes && ttypes.createPolicy)
     { maketrusted
        = ttypes.createPolicy(rxs,
