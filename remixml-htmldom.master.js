@@ -22,6 +22,7 @@
 
   const O = Object;
   const D = document;
+  const W = window;
 
   var /** function(!Array,number=):string */ abstract2txt;
   const /** !Node */ diva = newel("div");
@@ -68,23 +69,25 @@
       }
     });
 
+  const /** string */ rxs = "remixml";
+
   function /** !Object */ factory(/** !Object */ rxml)
   { abstract2txt = rxml["abstract2txt"];
+    var ttypes = W.trustedTypes;
+    if (ttypes && ttypes.createPolicy)
+      // Add TrustedHTML properties to the string from abstract2txt()
+      abstract2txt = ttypes.createPolicy(rxs, { "a": abstract2txt })["a"];
     O.assign(rxml, g);
     return g;
   }
-
-  const /** string */ rxs = "remixml";
 
   if (typeof define == "function" && define["amd"])
     define("remixml-htmldom", [rxs], factory);
   else if (typeof exports == "object")
     O.assign(/** @type{!Object} */(exports),
      factory(require(rxs)));
-  else {
-    var W = window;
+  else
     W["RemixmlhtmlDOM"] = factory(W["Remixml"]);
-  }
 
 // Cut BEGIN delete
 }).call(this);

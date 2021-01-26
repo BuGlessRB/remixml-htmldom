@@ -17,6 +17,8 @@ is not possible).
 
 It runs inside any webbrowser environment.
 
+It supports trustedTypes policies.
+
 ## Reference documentation
 
 - `Remixmlhtmldom.abstract2dom(abstract, node?)`<br />
