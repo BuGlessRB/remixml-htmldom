@@ -24,7 +24,9 @@
   const D = document;
   const W = window;
 
+  var /** function(!Array,number=):string */ abstract2txtorig;
   var /** function(!Array,number=):string */ abstract2txt;
+  var /** function(string):string */ maketrusted;
   const /** !Node */ diva = newel("div");
 
   function /** !Node */ newel(/** string */ n)
@@ -71,18 +73,21 @@
 
   const /** string */ rxs = "remixml";
 
-  function /** string */ retit(/** string */ s) { return s; }
-
   function /** !Object */ factory(/** !Object */ rxml)
-  { var ra2t = abstract2txt = rxml["abstract2txt"];
+  { abstract2txt = rxml["abstract2txt"];
     var ttypes = W.trustedTypes;
     if (ttypes && ttypes.createPolicy)
+    { maketrusted
+       = ttypes.createPolicy(rxs,
+        { "createHTML": function /** string */(/** string */ s) { return s; }
+        })["createHTML"];
+      abstract2txtorig = abstract2txt;
       // Add TrustedHTML properties to the string from abstract2txt()
       abstract2txt
-       = function/** string*/(/** !Array */ abstract,/** number= */ html)
-       { return ttypes.createPolicy(rxs,
-          { "createHTML": retit })["createHTML"](ra2t(abstract, html));
-       }
+       = function /** string*/(/** !Array */ abstract,/** number= */ html)
+      { return maketrusted(abstract2txtorig(abstract, html));
+      };
+    }
     O.assign(rxml, g);
     return g;
   }
