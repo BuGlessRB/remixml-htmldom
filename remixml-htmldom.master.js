@@ -76,7 +76,8 @@
     var ttypes = W.trustedTypes;
     if (ttypes && ttypes.createPolicy)
       // Add TrustedHTML properties to the string from abstract2txt()
-      abstract2txt = ttypes.createPolicy(rxs, { "a": abstract2txt })["a"];
+      abstract2txt = ttypes.createPolicy(rxs,
+       { "createHTML": abstract2txt })["createHTML"];
     O.assign(rxml, g);
     return g;
   }
