@@ -74,7 +74,7 @@
   function /** !Object */ factory(/** !Object */ rxml)
   { abstract2txt = rxml["abstract2txt"];
     var ttypes = W.trustedTypes;
-    if (ttypes && ttypes.createPolicy)
+    if (0 && ttypes && ttypes.createPolicy)
       // Add TrustedHTML properties to the string from abstract2txt()
       abstract2txt = ttypes.createPolicy(rxs,
        { "createHTML": abstract2txt })["createHTML"];
