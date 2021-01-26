@@ -71,13 +71,18 @@
 
   const /** string */ rxs = "remixml";
 
+  function /** string */ retit(/** string */ s) { return s; }
+
   function /** !Object */ factory(/** !Object */ rxml)
-  { abstract2txt = rxml["abstract2txt"];
+  { var ra2t = abstract2txt = rxml["abstract2txt"];
     var ttypes = W.trustedTypes;
-    if (0 && ttypes && ttypes.createPolicy)
+    if (ttypes && ttypes.createPolicy)
       // Add TrustedHTML properties to the string from abstract2txt()
-      abstract2txt = ttypes.createPolicy(rxs,
-       { "createHTML": abstract2txt })["createHTML"];
+      abstract2txt
+       = function/** string*/(/** !Array */ abstract,/** number= */ html)
+       { return ttypes.createPolicy(rxs,
+          { "createHTML": retit })["createHTML"](ra2t(abstract, html));
+       }
     O.assign(rxml, g);
     return g;
   }
