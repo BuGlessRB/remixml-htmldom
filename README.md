@@ -17,7 +17,9 @@ is not possible).
 
 It runs inside any webbrowser environment.
 
-It supports trustedTypes policies.
+If the browser enforces trusted-types, add the `remixml` policy;
+e.g. through an HTTP header like:
+`Content-Security-Policy: trusted-types remixml;`
 
 ## Reference documentation
 

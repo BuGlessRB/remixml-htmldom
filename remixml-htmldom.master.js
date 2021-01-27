@@ -25,9 +25,8 @@
   const D = document;
   const W = window;
 
-  var /** function(!Array,number=):string */ abstract2txtorig;
   var /** function(!Array,number=):string */ abstract2txt;
-  var /** function(string):string */ maketrusted;
+  var /** TrustedTypePolicy */ policy;
   const /** !Node */ diva = newel("div");
 
   function /** !Node */ newel(/** string */ n)
@@ -38,7 +37,11 @@
   { "abstract2dom":
       function /** !Node */(/** !Array */ tpl,/** !Node= */ node)
       { var /** !Node */ newnodes = node || diva;
-	newnodes.innerHTML = abstract2txt(tpl, 1);
+	var /** TrustedHTML|TrustedScript|TrustedScriptURL|string */ sanitised;
+	sanitised = abstract2txt(tpl, 1);
+	if (policy)
+	  sanitised = policy.createHTML(sanitised);
+	newnodes.innerHTML = sanitised;
 	var /** !NodeList<!Element> */ scripts
 	 = newnodes.querySelectorAll("script");
 	var /** number */ i = 0;
@@ -46,12 +49,18 @@
 	{ var /** !Node */ olds = scripts[i++];
 	  // Clone script tag
           var /** !Node */ ns = D.createElement("script");
-          ns.text = olds.text;
+          sanitised = olds.text;
+	  if (policy)
+	    sanitised = policy.createScript(sanitised);
+          ns.text = /** @type{string} */(sanitised);
           var /** NamedNodeMap<!Attr> */ attrs = olds.attributes;
           var /** number */ j;
           for (j = 0; j < attrs.length; )
           { let /** Attr */ attr = attrs[j++];
-            ns.setAttribute(attr.name, attr.value);
+	    sanitised = attr.value;
+	    if (policy && attr.name === "src")
+	      sanitised = policy.createScriptURL(sanitised);
+            ns.setAttribute(attr.name, sanitised);
           }
 	  // Execute script tag
 	  olds.parentNode.replaceChild(ns, olds);
@@ -74,21 +83,14 @@
 
   const /** string */ rxs = "remixml";
 
+  function /** string */ retit(/** string */ s) { return s; }
+
   function /** !Object */ factory(/** !Object */ rxml)
   { abstract2txt = rxml["abstract2txt"];
-    var ttypes = FALSE && W.trustedTypes;
-    if (ttypes && ttypes.createPolicy)
-    { maketrusted
-       = ttypes.createPolicy(rxs,
-        { "createHTML": function /** string */(/** string */ s) { return s; }
-        })["createHTML"];
-      abstract2txtorig = abstract2txt;
-      // Add TrustedHTML properties to the string from abstract2txt()
-      abstract2txt
-       = function /** string*/(/** !Array */ abstract,/** number= */ html)
-      { return maketrusted(abstract2txtorig(abstract, html));
-      };
-    }
+    var ttypes = W.trustedTypes;
+    if (ttypes)
+      policy = ttypes.createPolicy(rxs,
+        { createHTML: retit, createScript: retit, createScriptURL: retit });
     O.assign(rxml, g);
     return g;
   }
