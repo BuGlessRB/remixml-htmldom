@@ -74,13 +74,6 @@
       }
   };
 
-  if (!O.assign)
-    O.defineProperty(O, "assign",
-    { "value": function(d, s, i)
-      { if (s) for (i in s) d[i] = s[i]; return d;
-      }
-    });
-
   const /** string */ rxs = "remixml";
 
   function /** string */ retit(/** string */ s) { return s; }
