@@ -10,7 +10,7 @@
 /** @define {number} */ var FALSE = 0;
 
 // Cut BEGIN delete
-(function()
+(() =>
 { "use strict";
 // Cut END delete
 
@@ -35,7 +35,7 @@
 
   const /** !Object */ g =
   { "abstract2dom":
-      function /** !Node */(/** !Array */ tpl,/** !Node= */ node)
+      /** !Node */(/** !Array */ tpl,/** !Node= */ node) =>
       { var /** !Node */ newnodes = node || diva;
 	var /** TrustedHTML|TrustedScript|TrustedScriptURL|string */ sanitised;
 	sanitised = abstract2txt(tpl, 1);
